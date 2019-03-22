@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/eksapsy/vim/config'
+let g:netrw_dirhist_2='/home/eksapsy/.vim/bundle/Vundle.vim'
+let g:netrw_dirhist_3='/home/eksapsy/.vim/bundle/Vundle.vim/autoload'
+let g:netrw_dirhist_4='/home/eksapsy/Desktop/projects/discordbot/sharding-manager-adapter'
+let g:netrw_dirhist_5='/home/eksapsy/Desktop/projects/discordbot/sharding-manager-adapter/src'
+let g:netrw_dirhist_6='/home/eksapsy'
+let g:netrw_dirhist_7='/home/eksapsy/.vim'
+let g:netrw_dirhist_8='/home/eksapsy/.vim/config'
+let g:netrw_dirhist_9='/home/eksapsy'
