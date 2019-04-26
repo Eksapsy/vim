@@ -32,6 +32,17 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
+" Move lines with Alt+j/k
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Instant exit from all
+nnoremap <Leader>aq :qa<CR>
+
 " Set colorscheme #visual_studio #colorscheme
 colorscheme codedark
 
