@@ -13,6 +13,12 @@ endw
 
 set timeout ttimeoutlen=50
 
+" Change escape key for command mode, so it doesn't interfeer with alt combos
+" and you dont have to stretch your hand
+inoremap jj <ESC>
+vnoremap <C-[> <ESC>
+nnoremap <C-[> <ESC>
+
 " Change the leader from '\'
 let mapleader="\\"
 
