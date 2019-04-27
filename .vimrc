@@ -1,4 +1,9 @@
 " Mark Alt+Key as alt combination rather than escape combination
+"
+" Gnome terminals don't support alt key and interpret it as <ESC> key.
+" To solve this issue indirectly, we'll just change the escape combos and use
+" alt key for line moving. This also saves you from having to stretch your arm
+" to escape. Escape sucks.
 let c='a'
 while c <= 'z'
   exec "set <A-".c.">=\e".c
