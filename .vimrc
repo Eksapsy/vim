@@ -57,6 +57,14 @@ nnoremap <Leader>aq :qa<CR>
 " Set colorscheme #visual_studio #colorscheme
 colorscheme codedark
 
+" Highlight TODO and FIXME
+augroup vimrc_todo
+    au!
+    au Syntax * syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|XXX):/
+          \ containedin=.*Comment,vimCommentTitle
+augroup END
+hi def link MyTodo Todo
+
 " Set powerline #statusbar #status #statusline
 set rtp+=~/.local/lib/python3.6/site-packages/powerline/bindings/vim
 set laststatus=2
