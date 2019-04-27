@@ -171,6 +171,17 @@ let g:tagbar_ctags_bin='/snap/bin/universal-ctags.ctags'
 let g:tagbar_autofocus=1
 let g:tagbar_autopreview=1
 " Tagbar #language
+let g:tagbar_type_vim = {
+	\ 'ctagstype' : 'vim',
+	\ 'kinds': [
+		\ 'n:filenames',
+		\ 'v:variables:1',
+		\ 'f:functions',
+		\ 'a:autocommands:1',
+		\ 'c:commands',
+		\ 'm:maps:1'
+	\ ]
+\ }
 let g:tagbar_type_go = {
 	\ 'ctagstype' : 'go',
 	\ 'kinds'     : [
