@@ -1,145 +1,20 @@
-" Mark Alt+Key as alt combination rather than escape combination
-"
-" Gnome terminals don't support alt key and interpret it as <ESC> key.
-" To solve this issue indirectly, we'll just change the escape combos and use
-" alt key for line moving. This also saves you from having to stretch your arm
-" to escape. Escape sucks.
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-
-set timeout ttimeoutlen=50
-
-" Change escape key for command mode, so it doesn't interfeer with alt combos
-" and you dont have to stretch your hand
-inoremap jj <ESC>
-vnoremap <C-[> <ESC>
-nnoremap <C-[> <ESC>
-
-" Change the leader from '\'
-let mapleader="\\"
-
-" Make sure filetype is on
-filetype plugin on
-
-" YouCompleteMe requires utf8 encoding
-set encoding=utf-8
-
 " Vundle plugin manager setup
 " All plugins should be added on that file
 " Do not add Plugins or other Vundle commands in .vimrc
 source ~/.vim/configs/vundle.vimrc
 
-" Set line lines indicators
-set number
-set relativenumber
+"
+" SETTINGS
+"
+"
 
-" Copy & Paste maps to system clipboard
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
-
-" Move lines with Alt+j/k
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
-
-" Instant exit from all
-nnoremap <Leader>aq :qa<CR>
-
-" Set colorscheme #visual_studio #colorscheme
-colorscheme codedark
-
-" Highlight TODO and FIXME
-augroup vimrc_todo
-    au!
-    au Syntax * syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|XXX):/
-          \ containedin=.*Comment,vimCommentTitle
-augroup END
-hi def link MyTodo Todo
-
-" Set powerline #statusbar #status #statusline
-set rtp+=~/.local/lib/python3.6/site-packages/powerline/bindings/vim
-set laststatus=2
-set t_Co=256
-
-" Golang Linter
-set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
-autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
-
-" Nerdtree #auto_open
-" autocmd vimenter *  NERDTree
-" #auto-close
-let NERDTreeQuitOnOpen = 1
-
+" Change the leader from '\'
+let mapleader=","
+" Scroll centering
+set scrolloff=9999
 " More natural split opening #buffer #split
 set splitbelow
 set splitright
-
-" Valloric/youcompleteme #autocomplete
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-
-" leafgarland/typescript-vim #typescript #lintering
-autocmd FileType typescript setlocal completeopt+=menu,preview
-
-" NerdTree #mappings #toggle
-nmap <F6> :NERDTreeToggle<CR>
-
-" GitGutter #signs #colors
-highlight GitGutterAdd    guifg=#009900 ctermfg=2
-highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-highlight GitGutterDelete guifg=#ff2222 ctermfg=1
-
-" Enable GitGutter line highlights on changes
-let g:gitgutter_highlight_lines = 1
-
-" Disable arrow movement, resize splits instead.
-nnoremap <Up>	 :resize +2<CR>
-nnoremap <Down>  :resize -2<CR>
-nnoremap <Left>  :vertical resize +2<CR>
-nnoremap <Right> :vertical resize -2<CR>
-" Shortcuts
-nnoremap <Leader>o :Files<CR>
-nnoremap <Leader>O :CtrlP<CR>
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-" Visual search
-vnoremap // y/<C-R>"<CR>
-
-
-" Auto reload when file changes in the disk
-set autoread
-au CursorHold, CursorHoldI * checktime " Trigger when cursor stops moving
-au FocusGained, BufEnter * :checktime " Trigger on buffer change or terminal focus
-
-" ctrlp #exclude #files
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" ctrlp-funky #mappings
-nnoremap <Leader>fu :CtrlPFunky<Cr>
-nnoremap <Leader>fU :execute 'CtrlPFunky ' .expand('<cword>')<Cr>
-
-" google/vim-codefmt #autoformat #format #code
-augroup autoformat_settings
-  autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,protoAutoFormatBuffer clang-format
-  autocmd Filetype javascript,typescript AutoFormatBuffer prettier
-  autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType go AutoFormatBuffer gofmt
-  autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType html,css,json AutoFormatBuffer js-beautify
-  autocmd FileType java AutoFormatBuffer google-java-format
-  autocmd FileType python AutoFormatBuffer yapf
-  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-augroup END
-
 " Set vim history max
 set history=1000
 " Set undo history
@@ -164,8 +39,152 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 autocmd filetype html,xml set listchars-=tab:>.
 " Paste toggle
 set pastetoggle=<F2>
+" Better search
+" incsearch executes a search every time a new key is inserted
+" ignorecase ignores input case
+set incsearch
+" YouCompleteMe requires utf8 encoding
+set encoding=utf-8
+" Set line lines indicators
+set number
+set relativenumber
+" Set colorscheme #visual_studio #colorscheme
+colorscheme codedark
+" VimAirline theme
+let g:airline_theme = 'codedark'
+" Theme Compatibility
+set t_Co=256
+set t_ut=
+colorscheme codedark
+
+"
+" MAPPINGS
+"
+"
+
+" Change escape key for command mode, so it doesn't interfeer with alt combos
+" and you dont have to stretch your hand
+inoremap jj <ESC>
+" Copy & Paste maps to system clipboard
+noremap <leader>y "*y
+noremap <leader>p "*p
+noremap <leader>Y "+y
+noremap <leader>P "+p
+" Reload shortcut
+noremap <leader>e :so ~/.vimrc<CR>
+" Save on <leader>w
+noremap <leader>w :w<CR>
+" Quit file
+noremap <leader>q :q<CR>
+" Force quit
+noremap <leader>!q :q!<CR>
+" Quit all
+noremap <leader>aq :qa<CR>
+" Force quit all
+noremap <leader>!aq :qa!<CR>
+" Move lines with Alt+j/k
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+" Disable arrow movement, resize splits instead.
+nnoremap <Up> :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+" Shortcuts
+nnoremap <leader>o :Files<CR>
+nnoremap <leader>O :CtrlP<CR>
+" Visual search
+vnoremap // y/<C-R>"<CR>
+" NerdTree #mappings #toggle
+noremap <F6> :NERDTreeToggle<CR>
+" ctrlp-funky #mappings
+nnoremap <leader>fu :CtrlPFunky<Cr>
+nnoremap <leader>fU :execute 'CtrlPFunky ' .expand('<cword>')<Cr>
 " TagBar #mapping
-nmap <F8> :TagbarToggle<CR>
+noremap <F8> :TagbarToggle<CR>
+" Easier window navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+" Tab navigation #tabs #tab #navigation
+" (ref: https://vim.fandom.com/wiki/Alternative_tab_navigation)
+nnoremap th  :tabfirst<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+nnoremap <tab>   :tabnext<CR>
+nnoremap <s-tab> :tabprevious<CR>
+" Delete backwards words with Ctrl+Backspace
+inoremap <C-BS> <C-W>
+
+"
+" PLUGINS MODIFICATIONS etc.
+"
+"
+
+
+" Highlight TODO and FIXME
+augroup vimrc_todo
+    au!
+    au Syntax * syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|XXX):/
+          \ containedin=.*Comment,vimCommentTitle
+augroup END
+hi def link MyTodo Todo
+
+" Golang Linter
+set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+
+" Nerdtree #auto_open
+" autocmd vimenter *  NERDTree
+" #auto-close
+let NERDTreeQuitOnOpen = 1
+
+" Valloric/youcompleteme #autocomplete
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+
+" leafgarland/typescript-vim #typescript #lintering
+autocmd FileType typescript setlocal completeopt+=menu,preview
+
+" GitGutter #signs #colors
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
+" Enable GitGutter line highlights on changes
+let g:gitgutter_highlight_lines = 1
+
+" Auto reload when file changes in the disk
+set autoread
+au CursorHold, CursorHoldI * checktime " Trigger when cursor stops moving
+au FocusGained, BufEnter * :checktime " Trigger on buffer change or terminal focus
+
+" ctrlp #exclude #files
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" google/vim-codefmt #autoformat #format #code
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,protoAutoFormatBuffer clang-format
+  autocmd Filetype javascript,typescript AutoFormatBuffer prettier
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+augroup END
+
 " Tagbar #configurations
 let g:tagbar_ctags_bin='/snap/bin/universal-ctags.ctags'
 let g:tagbar_autofocus=1
@@ -263,27 +282,6 @@ let g:tagbar_type_javascript = {
 "      \ 'S:styled components',
 "      \ ]}
 
-" Easier window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
-" Tab navigation 
-" (ref: https://vim.fandom.com/wiki/Alternative_tab_navigation)
-nnoremap th  :tabfirst<CR>
-nnoremap tk  :tabnext<CR>
-nnoremap tj  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
-" Alternatively use
-" nnoremap th :tabnext<CR>
-" nnoremap tl :tabprev<CR>
-" nnoremap tn :tabnew<CR>
-
 " vim-javascript # jsdocs
 let g:javascript_plugin_jsdoc = 1
 " vim javascript # concealing characters
@@ -300,4 +298,12 @@ let g:javascript_conceal_super                = "Ω"
 let g:javascript_conceal_arrow_function       = "⇒"
 let g:javascript_conceal_noarg_arrow_function = "🞅"
 let g:javascript_conceal_underscore_arrow_function = "🞅"
+" VimAirline shorten file path name
+let g:airline_section_b = '%-0.10{getcwd()}'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#displayed_head_limit = 10
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" to truncate all path sections but the last one, e.g. a branch
+"   " 'foo/bar/baz' becomes 'f/b/baz', use
+let g:airline#extensions#branch#format = 2
 
