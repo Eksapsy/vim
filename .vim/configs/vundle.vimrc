@@ -22,7 +22,7 @@ Plugin 'leafgarland/typescript-vim'
 " Typescript Lintering
 Plugin 'Qurami/tsuquyomi'
 " JS and Typescript correct indentation
-Plugin 'jason0x43/vim-js-indent'
+" Plugin 'jason0x43/vim-js-indent'
 " Code theme
 Plugin 'tomasiser/vim-code-dark'
 " Git Diff Line indicators
@@ -39,6 +39,20 @@ Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
 " TagBar for function markings
 Plugin 'majutsushi/tagbar'
+" Javascript editing support
+Plugin 'ternjs/tern_for_vim'
+" Javascript indentation and improved highlighting
+Plugin 'pangloss/vim-javascript'
+" Comment lines with shortcut
+Plugin 'scrooloose/nerdcommenter'
+" VimTmuxNavigator #tmux #navigation #vim
+Plugin 'christoomey/vim-tmux-navigator'
+" VimGo #golang #go #tools
+Plugin 'fatih/vim-go'
+" GoCode #golang #go #autocompletion
+Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
+" Vim Airline #powerline #line #horizontalline
+Plugin 'vim-airline/vim-airline'
 
 " All of the plugins must be hosted before this line
 call vundle#end()
